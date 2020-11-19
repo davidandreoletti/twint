@@ -143,7 +143,9 @@ def Tweet(tw, config):
         t.user_rt = ''
         t.user_rt_id = ''
     try:
-        t.quote_url = tw['quoted_status_permalink']['expanded'] if tw['is_quote_status'] else ''
+        quote_url = tw['quoted_status_permalink']['expanded'] if tw['is_quote_status'] else ''
+        parts = quote_url.split('?')
+        t.quote_url = parts[0]
     except KeyError:
         # means that the quoted tweet have been deleted
         t.quote_url = 0
